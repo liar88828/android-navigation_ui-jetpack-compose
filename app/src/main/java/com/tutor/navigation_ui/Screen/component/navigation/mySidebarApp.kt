@@ -1,4 +1,4 @@
-package com.tutor.navigation_ui.Screen.component
+package com.tutor.navigation_ui.Screen.component.navigation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -174,7 +174,7 @@ private fun SlideBarProfile(modifier: Modifier) {
 
 @Preview
 @Composable
-private fun SlideBarListPrev(modifier: Modifier = Modifier) {
+private fun SlideBarListPrev() {
 	Column {
 		SlideBarList(
 			scope = rememberCoroutineScope(),

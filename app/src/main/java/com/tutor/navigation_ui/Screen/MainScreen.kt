@@ -1,6 +1,7 @@
 package com.tutor.navigation_ui.Screen
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,9 +22,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.tutor.navigation_ui.Screen.component.DrawerBottomScreen
-import com.tutor.navigation_ui.Screen.component.MyBottomAppBar
-import com.tutor.navigation_ui.Screen.component.MyTopAppBar
-import com.tutor.navigation_ui.Screen.component.SlideBar
+import com.tutor.navigation_ui.Screen.component.navigation.MyBottomAppBar
+import com.tutor.navigation_ui.Screen.component.navigation.MyTopAppBar
+import com.tutor.navigation_ui.Screen.component.navigation.SlideBar
+import com.tutor.navigation_ui.Screen.component.navigation.MyFloatingButton
 import com.tutor.navigation_ui.model.SRoute
 import kotlinx.coroutines.CoroutineScope
 
@@ -31,7 +33,6 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
 	val navController = rememberNavController()
-
 //	slide
 	val coroutineScope = rememberCoroutineScope()
 	val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -75,9 +76,16 @@ fun MyScaffold(
 	Scaffold(
 		modifier = Modifier.fillMaxSize(),
 		topBar = { MyTopAppBar(coroutineScope, drawerState) },
-		bottomBar = { MyBottomAppBar( navController, showButtonSheet) },
-		content = { innerPadding ->
-			NavHost(navController = navController, startDestination = SRoute.Home.route) {
+		bottomBar = { MyBottomAppBar(navController, showButtonSheet) },
+		floatingActionButton = { MyFloatingButton() },
+		content = { paddingValues ->
+			NavHost(
+				modifier = Modifier
+					.padding(paddingValues)
+					.fillMaxSize(),
+				navController = navController,
+				startDestination = SRoute.Home.route
+			) {
 				composable(SRoute.Home.route) { HomeScreen() }
 				composable(SRoute.Profile.route) { ProfileScreen() }
 				composable(SRoute.Setting.route) { SettingScreen() }
@@ -97,4 +105,6 @@ fun MyScaffold(
 private fun MainScreenPrev() {
 	MainScreen()
 }
+
+
 

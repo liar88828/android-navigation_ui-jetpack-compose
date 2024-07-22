@@ -1,4 +1,4 @@
-package com.tutor.navigation_ui.Screen.component
+package com.tutor.navigation_ui.Screen.component.navigation
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
